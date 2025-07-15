@@ -1,6 +1,6 @@
 package system_design.creational.singelton;
 
-//Eagert loading: The instance is create before getInstance() method is called
+//Eager loading: The instance is create before getInstance() method is called
 public class DbConnectionEagerLoad {
 	private static DbConnectionEagerLoad connectionEagerLoad = new DbConnectionEagerLoad();
 	
