@@ -1,0 +1,118 @@
+SOLID Principles of Object-Oriented Design
+--------------------------------------------------
+The SOLID principles are five key guidelines for creating understandable, flexible, and maintainable software systems.
+Introduced by Robert C. Martin (Uncle Bob), they help in designing robust object-oriented code.
+
+1. S - Single Responsibility Principle (SRP)
+   A class should have only one reason to change — it should do one thing only.
+
+   Example:
+   // Class for handling report data
+   public class Report {
+       private String content;
+       public Report(String content) { this.content = content; }
+       public String getContent() { return content; }
+   }
+
+   // Class only for printing
+   public class ReportPrinter {
+       public void print(Report report) {
+           System.out.println("Printing: " + report.getContent());
+       }
+   }
+
+2. O - Open/Closed Principle (OCP)
+   Software entities should be open for extension, but closed for modification.
+
+   Example:
+   public interface Shape {
+       double area();
+   }
+
+   public class Circle implements Shape {
+       private double radius;
+       public Circle(double radius) { this.radius = radius; }
+       public double area() { return Math.PI * radius * radius; }
+   }
+
+   public class Rectangle implements Shape {
+       private double width, height;
+       public Rectangle(double w, double h) { width = w; height = h; }
+       public double area() { return width * height; }
+   }
+
+   public class AreaCalculator {
+       public double totalArea(List<Shape> shapes) {
+           return shapes.stream().mapToDouble(Shape::area).sum();
+       }
+   }
+
+3. L - Liskov Substitution Principle (LSP)
+   Subtypes must be substitutable for their base types without altering correctness.
+
+   Example:
+   interface Bird {}
+   interface FlyingBird extends Bird {
+       void fly();
+   }
+
+   class Sparrow implements FlyingBird {
+       public void fly() { System.out.println("Sparrow flies"); }
+   }
+
+   class Ostrich implements Bird {
+       // No fly method — it complies with LSP now
+   }
+
+4. I - Interface Segregation Principle (ISP)
+   Clients should not be forced to depend on methods they do not use.
+
+   Example:
+   interface Workable {
+       void work();
+   }
+   interface Eatable {
+       void eat();
+   }
+
+   class Robot implements Workable {
+       public void work() { System.out.println("Robot works"); }
+   }
+
+   class Human implements Workable, Eatable {
+       public void work() { System.out.println("Human works"); }
+       public void eat()  { System.out.println("Human eats"); }
+   }
+
+5. D - Dependency Inversion Principle (DIP)
+   High-level modules should not depend on low-level modules. Both should depend on abstractions.
+
+   Example:
+   interface Keyboard {
+       String getInput();
+   }
+
+   class WiredKeyboard implements Keyboard {
+       public String getInput() { return "Typing with wired keyboard"; }
+   }
+
+   class Computer {
+       private Keyboard keyboard;
+       public Computer(Keyboard keyboard) {
+           this.keyboard = keyboard;
+       }
+
+       public void input() {
+           System.out.println(keyboard.getInput());
+       }
+   }
+
+Summary Table
+--------------------------------------------------
+| Principle | Meaning               | Benefit                          |
+|-----------|------------------------|----------------------------------|
+| S         | Single Responsibility | Easier to debug & maintain       |
+| O         | Open/Closed           | Less risky changes               |
+| L         | Liskov Substitution   | Reliable polymorphism            |
+| I         | Interface Segregation | No forced unused methods         |
+| D         | Dependency Inversion  | Loose coupling, better testing   |
