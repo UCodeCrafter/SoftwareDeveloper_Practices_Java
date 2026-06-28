@@ -2,8 +2,9 @@ package system_design.creational.singelton;
 
 
 //Double Locking is used in real world programs it is efficient than synchronization
+//Without the volatile keyword, your code is susceptible to a subtle JVM behavior called Instruction Reordering.
 public class DbConnectionDoubleLock {
-	private static DbConnectionDoubleLock dbConnectionDoubleLock;
+	private static volatile DbConnectionDoubleLock dbConnectionDoubleLock;
 	
 	private DbConnectionDoubleLock() {
 		

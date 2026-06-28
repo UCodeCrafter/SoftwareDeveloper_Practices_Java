@@ -4,28 +4,25 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class Main {
     public static void main(String[] args) {
-        final int[] count = {0};
+        int count = 1;
         Thread oddThread = new Thread( ()->
         {
-            for (int i = 0; i < 10; i++) {
-                if(i%2==0){
-//                    try {
-////                        wait();
-//                    } catch (InterruptedException e) {
-//                        throw new RuntimeException(e);
-//                    }
-                }
-                System.out.println(i);
+            while(count < 15){
+                System.out.println("odd no: " + count);
 
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
             }
         }
                 );
 
         Thread evenThread = new Thread( ()->
         {
-            for (int i = 0; i < 10; i++) {
-                System.out.println(i);
-
+            while(count < 15){
+                System.out.println("Even no:"+ count);
             }
         }
         );
