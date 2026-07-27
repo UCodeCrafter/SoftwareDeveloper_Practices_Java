@@ -1,4 +1,4 @@
-package design_patterns.creational;
+package design_patterns.creational.builder;
 
 import java.util.Map;
 
